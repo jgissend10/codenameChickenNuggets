@@ -72,7 +72,7 @@ def index():
             '<a href="{{ url_for("logout") }}">Logout</a>'
         return render_template_string(t)
     else:
-        app.send_static_file('index.html')
+        return app.send_static_file('index.html')
 
 @github.access_token_getter
 def token_getter():
@@ -140,4 +140,4 @@ def contents(owner, repo, path):
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
