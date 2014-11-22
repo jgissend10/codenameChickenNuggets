@@ -48,6 +48,11 @@ class User(Base):
         self.github_access_token = github_access_token
 
 
+@app.route('/static/<path:path>')
+def static_proxy(path):
+    # send_static_file will guess the correct MIME type
+    return app.send_static_file(os.path.join('static', path))
+
 @app.before_request
 def before_request():
     g.user = None
@@ -138,4 +143,4 @@ def contents(owner, repo, path):
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, static_url_path='')
