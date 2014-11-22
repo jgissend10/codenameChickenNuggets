@@ -62,7 +62,7 @@ def before_request():
 
 @app.after_request
 def after_request(response):
-    db_session.remove()
+    ##db_session.remove()
     return response
 
 @app.route('/')
