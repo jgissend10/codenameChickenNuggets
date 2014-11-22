@@ -70,12 +70,9 @@ def index():
     if g.user:
         t = 'Hello! <a href="{{ url_for("user") }}">Get user</a> ' \
             '<a href="{{ url_for("logout") }}">Logout</a>'
-            return render_template_string(t)
+        return render_template_string(t)
     else:
         app.send_static_file('index.html')
-
-    
-
 
 @github.access_token_getter
 def token_getter():
