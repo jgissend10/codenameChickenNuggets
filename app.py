@@ -119,7 +119,7 @@ def user():
 
 @app.route('/repos')
 def repos():
-	return flask.jsonify([{'name': repo['full_name']} for repo in github.get('user/repos')])
+	return flask.jsonify(repos = [{'name': repo['full_name']} for repo in github.get('user/repos')])
 
 @app.route('/repo/<owner>/<repo>')
 def repo(owner, repo):
@@ -140,4 +140,4 @@ def contents(owner, repo, path):
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
