@@ -4,11 +4,12 @@ import requests
 
 app = Flask(__name__)
 # comment out when you're done testing
-app.debug = True
+#app.debug = True
 app.secret_key = APP_SECRET
 
 @app.route('/')
 def index():
+#authenticates with venmo 
     if session.get('venmo_token'):
         return 'Your Venmo token is %s' % session.get('venmo_token')
     else:
@@ -22,6 +23,7 @@ def oauth_authorized():
         "client_secret":CONSUMER_SECRET,
         "code":AUTHORIZATION_CODE
         }
+#Gets information
     url = "https://api.venmo.com/v1/oauth/access_token"
     response = requests.post(url, data)
     response_dict = response.json()
@@ -31,10 +33,9 @@ def oauth_authorized():
     session['venmo_token'] = access_token
     session['venmo_username'] = user['username']
     
-#    session['test'] = user['ID']
 
+#returns id number
     return 'You were signed in as %s' % user['id']
-#    return redirect(url_for('pay'))
 
 
 
